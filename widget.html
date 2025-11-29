@@ -293,66 +293,40 @@
             <!-- 2) To-Do / Tasks - Full Width -->
             <div class="container-fluid pt-0 px-4">
                 <div class="bg-secondary rounded p-4 mb-4"
-                     style="
+                    style="
                         background-image: url('img/todo-bg.jpg');
                         background-size: cover;
                         background-position: center;
                         background-repeat: no-repeat;
                         background-blend-mode: overlay;
-                     ">
+                    ">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h5 class="mb-0">Today's Tasks &amp; Habits</h5>
                         <a href="#" class="small text-decoration-underline">View all tasks</a>
                     </div>
-
+                
+                    <!-- Input row -->
                     <div class="d-flex mb-3">
-                        <input id="task-input" class="form-control bg-dark border-0" type="text"
-                               placeholder="Add a new task or habit">
-                        <button type="button" class="btn btn-primary ms-2">Add</button>
+                        <input
+                            id="task-input"
+                            class="form-control bg-dark border-0"
+                            type="text"
+                            placeholder="Add a new task or habit">
+                        <button
+                            type="button"
+                            id="add-task-btn"
+                            class="btn btn-primary ms-2">
+                            Add
+                        </button>
                     </div>
-
-                    <!-- Example static tasks (will make dynamic later) -->
-                    <div id="task-list" class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Morning workout (30 min)</span>
-                                <button class="btn btn-sm text-muted"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="task-list" class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Drink 3L of water</span>
-                                <button class="btn btn-sm text-muted"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="task-list" class="d-flex align-items-center border-bottom py-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Hit 8,000 steps</span>
-                                <button class="btn btn-sm text-muted"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="task-list" class="d-flex align-items-center pt-2">
-                        <input class="form-check-input m-0" type="checkbox">
-                        <div class="w-100 ms-3">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <span>Evening stretch / cooldown</span>
-                                <button class="btn btn-sm text-muted"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
+                
+                    <!-- Dynamic task list (filled by tasks.js) -->
+                    <div id="task-list">
+                        <!-- tasks.js will render tasks here -->
                     </div>
                 </div>
             </div>
+
 
             <!-- 3) Weekly Progress - Full Width -->
             <div class="container-fluid pt-0 px-4">
