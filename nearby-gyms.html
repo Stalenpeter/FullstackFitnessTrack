@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FitTrack - Nearby Gyms</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <!-- Brand -->
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary">
+                        <i class="fa fa-dumbbell me-2"></i>FitTrack
+                    </h3>
+                </a>
+            
+                <!-- User summary -->
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="img/user.jpg" alt="User avatar"
+                             style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Guest User</h6>
+                        <span>Fitness Enthusiast</span>
+                    </div>
+                </div>
+            
+                <!-- Sidebar nav -->
+                <div class="navbar-nav w-100">
+                    <!-- Dashboard -->
+                    <a href="index.html" class="nav-item nav-link">
+                        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                
+                    <!-- Workouts -->
+                    <a href="workouts.html" class="nav-item nav-link">
+                        <i class="fa fa-dumbbell me-2"></i>Workouts &amp; Plans
+                    </a>
+                
+                    <!-- Widgets -->
+                    <a href="widget.html" class="nav-item nav-link">
+                        <i class="fa fa-th-large me-2"></i>Widgets
+                    </a>
+                
+                    <!-- Nearby Gyms (ACTIVE HERE) -->
+                    <a href="nearby-gyms.html" class="nav-item nav-link active">
+                        <i class="fa fa-map-marker-alt me-2"></i>Nearby Gyms
+                    </a>
+                
+                    <!-- Fitness News -->
+                    <a href="news.html" class="nav-item nav-link">
+                        <i class="fa fa-newspaper me-2"></i>Fitness News
+                    </a>
+                
+                    <!-- Gym Products -->
+                    <a href="products.html" class="nav-item nav-link">
+                        <i class="fa fa-shopping-cart me-2"></i>Gym Products
+                    </a>
+                
+                    <!-- Progress Gallery -->
+                    <a href="gallery.html" class="nav-item nav-link">
+                        <i class="fa fa-images me-2"></i>Progress Gallery
+                    </a>
+                
+                    <!-- Account / Auth -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="far fa-user me-2"></i>Account
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="signin.html" class="dropdown-item">Sign In</a>
+                            <a href="signup.html" class="dropdown-item">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-dumbbell"></i></h2>
+                </a>
+            
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+            
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Search gyms by area or city">
+                </form>
+            
+                <div class="navbar-nav align-items-center ms-auto">
+                    <!-- USER MENU -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="User avatar" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Guest</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">My Fitness Profile</a>
+                            <a href="#" class="dropdown-item">Goals & Settings</a>
+                            <a href="#" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Page Header -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded p-4 mb-4">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                        <div>
+                            <h3 class="mb-2">Nearby Gyms &amp; Fitness Centers</h3>
+                            <small class="text-muted">
+                                Find places to train near you. Use the map and suggestions to plan your next workout.
+                            </small>
+                        </div>
+                        <div class="mt-3 mt-md-0 d-flex flex-wrap gap-2">
+                            <button class="btn btn-sm btn-outline-light" type="button">
+                                <i class="fa fa-location-arrow me-1"></i>Use My Location
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" type="button">
+                                <i class="fa fa-filter me-1"></i>Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map + List -->
+            <div class="container-fluid px-4 pb-4">
+                <div class="row g-4">
+                    <!-- Map Column -->
+                    <div class="col-lg-8">
+                        <div class="bg-secondary rounded p-3 h-100">
+                            <h5 class="mb-3">Map View</h5>
+                            <div class="rounded overflow-hidden" style="height: 420px; border: 1px solid rgba(255,255,255,0.05);">
+                                <!-- Simple Google Maps embed searching for gyms; replace center location if you want -->
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2814.36006107221!2d-64.366743!3d45.091034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sgym!5e0!3m2!1sen!2sca!4v1700000000001!5m2!1sen!2sca"
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+
+                            </div>
+                            <small class="text-muted d-block mt-2">
+                                Map is for visual reference. In a future version, this can be connected to real-time search &amp; your exact location.
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- List Column -->
+                    <div class="col-lg-4">
+                        <div class="bg-secondary rounded p-3 mb-4">
+                            <h5 class="mb-3">Suggested Gyms</h5>
+
+                            <!-- Gym card 1 -->
+                            <div class="d-flex mb-3 pb-3 border-bottom border-dark">
+                                <div class="flex-shrink-0 me-3 d-none d-md-block">
+                                    <div class="rounded bg-dark d-flex align-items-center justify-content-center"
+                                         style="width: 64px; height: 64px;">
+                                        <i class="fa fa-dumbbell text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Iron Core Fitness</h6>
+                                    <small class="d-block text-muted mb-1">
+                                        1.2 km • Open until 10:00 PM
+                                    </small>
+                                    <small class="d-block text-muted mb-1">
+                                        Strength • Cardio • Personal Training
+                                    </small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="text-warning small">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-alt"></i>
+                                        </div>
+                                        <a href="#" class="small text-decoration-underline">View on map</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gym card 2 -->
+                            <div class="d-flex mb-3 pb-3 border-bottom border-dark">
+                                <div class="flex-shrink-0 me-3 d-none d-md-block">
+                                    <div class="rounded bg-dark d-flex align-items-center justify-content-center"
+                                         style="width: 64px; height: 64px;">
+                                        <i class="fa fa-heartbeat text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Pulse Athletic Club</h6>
+                                    <small class="d-block text-muted mb-1">
+                                        2.0 km • 24/7 Access
+                                    </small>
+                                    <small class="d-block text-muted mb-1">
+                                        Functional Training • Group Classes
+                                    </small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="text-warning small">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-alt"></i>
+                                            <i class="fa fa-star-o text-secondary"></i>
+                                        </div>
+                                        <a href="#" class="small text-decoration-underline">View on map</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gym card 3 -->
+                            <div class="d-flex mb-3 pb-3 border-bottom border-dark">
+                                <div class="flex-shrink-0 me-3 d-none d-md-block">
+                                    <div class="rounded bg-dark d-flex align-items-center justify-content-center"
+                                         style="width: 64px; height: 64px;">
+                                        <i class="fa fa-running text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">City Performance Studio</h6>
+                                    <small class="d-block text-muted mb-1">
+                                        3.5 km • Open until 9:00 PM
+                                    </small>
+                                    <small class="d-block text-muted mb-1">
+                                        HIIT • Conditioning • Coaching
+                                    </small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="text-warning small">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o text-secondary"></i>
+                                        </div>
+                                        <a href="#" class="small text-decoration-underline">View on map</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gym card 4 -->
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3 d-none d-md-block">
+                                    <div class="rounded bg-dark d-flex align-items-center justify-content-center"
+                                         style="width: 64px; height: 64px;">
+                                        <i class="fa fa-spa text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Zen Strength &amp; Wellness</h6>
+                                    <small class="d-block text-muted mb-1">
+                                        4.1 km • Open until 8:00 PM
+                                    </small>
+                                    <small class="d-block text-muted mb-1">
+                                        Yoga • Mobility • Light Strength
+                                    </small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="text-warning small">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-alt"></i>
+                                            <i class="fa fa-star-o text-secondary"></i>
+                                            <i class="fa fa-star-o text-secondary"></i>
+                                        </div>
+                                        <a href="#" class="small text-decoration-underline">View on map</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info box -->
+                        <div class="bg-secondary rounded p-3">
+                            <h6 class="mb-2">Tip</h6>
+                            <p class="small mb-1">
+                                When choosing a gym, think about distance, opening hours, equipment, and whether it matches your goals.
+                            </p>
+                            <small class="text-muted">
+                                Future upgrade: filter by price, amenities, and membership type.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                            <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
