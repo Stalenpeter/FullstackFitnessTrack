@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>FitTrack - Progress Gallery</title>
+    <title>FitTrack - Workouts & Plans</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -72,8 +72,8 @@
                         <i class="fa fa-tachometer-alt me-2"></i>Dashboard
                     </a>
                 
-                    <!-- Workouts -->
-                    <a href="workouts.html" class="nav-item nav-link">
+                    <!-- Workouts & Plans (ACTIVE HERE) -->
+                    <a href="workouts.html" class="nav-item nav-link active">
                         <i class="fa fa-dumbbell me-2"></i>Workouts &amp; Plans
                     </a>
                 
@@ -97,8 +97,8 @@
                         <i class="fa fa-shopping-cart me-2"></i>Gym Products
                     </a>
                 
-                    <!-- Progress Gallery (ACTIVE HERE) -->
-                    <a href="gallery.html" class="nav-item nav-link active">
+                    <!-- Progress Gallery -->
+                    <a href="gallery.html" class="nav-item nav-link">
                         <i class="fa fa-images me-2"></i>Progress Gallery
                     </a>
                 
@@ -131,7 +131,7 @@
                 </a>
             
                 <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search photos (not wired yet)">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Search workouts or plans">
                 </form>
             
                 <div class="navbar-nav align-items-center ms-auto">
@@ -157,78 +157,113 @@
                 <div class="bg-secondary rounded p-4 mb-4">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
                         <div>
-                            <h3 class="mb-2">Progress Gallery</h3>
+                            <h3 class="mb-2">Workouts &amp; Weekly Plan</h3>
                             <small class="text-muted">
-                                Upload your progress photos and see how far you’ve come over time.
+                                Create your weekly workout schedule, mark sessions complete, and keep track of your training.
                             </small>
                         </div>
                         <div class="mt-3 mt-md-0 text-md-end">
-                            <span class="badge bg-primary" id="photo-count-badge">0 Photos</span>
+                            <span class="badge bg-primary">Weekly View</span>
+                            <span class="badge bg-success">Saved Locally</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Upload + Gallery -->
+            <!-- Main Workouts Layout -->
             <div class="container-fluid px-4 pb-4">
                 <div class="row g-4">
-                    <!-- Upload Area -->
-                    <div class="col-12">
-                        <div class="bg-secondary rounded p-4 mb-2">
-                            <div class="row g-4 align-items-center">
-                                <div class="col-md-8">
-                                    <h5 class="mb-2">Upload Progress Photos</h5>
-                                    <p class="text-muted mb-3">
-                                        Add front, side, or back photos from your workouts or check-ins. 
-                                        These are stored locally in your browser (no server upload yet).
-                                    </p>
+                    <!-- Left: Days of the week -->
+                    <div class="col-lg-3">
+                        <div class="bg-secondary rounded p-3 h-100">
+                            <h5 class="mb-3">Select Day</h5>
+                            <div class="nav flex-column nav-pills gap-2" id="week-days">
+                                <!-- Buttons use data-day; JS controls active state -->
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="sunday">
+                                    <i class="fa fa-sun me-2"></i>Sunday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="monday">
+                                    <i class="fa fa-dumbbell me-2"></i>Monday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="tuesday">
+                                    <i class="fa fa-dumbbell me-2"></i>Tuesday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="wednesday">
+                                    <i class="fa fa-dumbbell me-2"></i>Wednesday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="thursday">
+                                    <i class="fa fa-dumbbell me-2"></i>Thursday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="friday">
+                                    <i class="fa fa-dumbbell me-2"></i>Friday
+                                </button>
+                                <button type="button" class="btn btn-dark text-start day-btn" data-day="saturday">
+                                    <i class="fa fa-sun me-2"></i>Saturday
+                                </button>
+                            </div>
 
-                                    <div id="upload-zone"
-                                         class="border border-dashed border-secondary rounded d-flex flex-column align-items-center justify-content-center p-4"
-                                         style="border-style: dashed; cursor: pointer;">
-                                        <i class="fa fa-cloud-upload-alt fa-2x mb-2 text-primary"></i>
-                                        <p class="mb-1">Drag &amp; drop images here, or click to browse.</p>
-                                        <small class="text-muted">JPEG, PNG only. Up to ~2–3MB per image recommended.</small>
-                                        <input type="file" id="photo-input" accept="image/*" multiple style="display:none;">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="bg-dark rounded p-3 h-100 d-flex flex-column justify-content-between">
-                                        <div>
-                                            <h6 class="mb-2">Tips</h6>
-                                            <ul class="small mb-3 ps-3">
-                                                <li>Use similar lighting and angle for each check-in.</li>
-                                                <li>Take photos weekly or bi-weekly for best comparison.</li>
-                                                <li>Front, side, and back shots help show real progress.</li>
-                                            </ul>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <button id="clear-gallery" class="btn btn-outline-danger btn-sm">
-                                                <i class="fa fa-trash me-1"></i>Clear All
-                                            </button>
-                                            <small class="text-muted text-end">
-                                                Stored in this browser only.
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="mt-4 small text-muted">
+                                <strong>Tip:</strong> Plan heavy sessions on days you have more time and energy. 
+                                Use lighter days for mobility and active recovery.
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gallery Grid -->
-                    <div class="col-12">
-                        <div class="bg-secondary rounded p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="mb-0">Your Photos</h5>
-                                <small class="text-muted" id="gallery-helper-text">
-                                    No photos yet. Upload your first progress picture!
-                                </small>
+                    <!-- Right: Workouts for selected day -->
+                    <div class="col-lg-9">
+                        <div class="bg-secondary rounded p-4 h-100">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+                                <div>
+                                    <h5 class="mb-1" id="selected-day-title">Workouts for Sunday</h5>
+                                    <small class="text-muted" id="selected-day-subtitle">
+                                        Add your sessions for this day. You can mark them completed after you train.
+                                    </small>
+                                </div>
+                                <div class="mt-3 mt-md-0">
+                                    <span class="badge bg-info" id="workout-count-badge">0 Workouts</span>
+                                </div>
                             </div>
 
-                            <div class="row g-3" id="gallery-grid">
-                                <!-- JS will append image cards here -->
+                            <!-- Add workout form -->
+                            <div class="bg-dark rounded p-3 mb-3">
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <input type="text"
+                                               id="workout-name"
+                                               class="form-control bg-transparent border-0 border-bottom text-white"
+                                               placeholder="Workout name (e.g. Chest & Triceps)">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select id="workout-type" class="form-select bg-dark border-0 border-bottom text-white">
+                                            <option value="strength">Strength</option>
+                                            <option value="cardio">Cardio</option>
+                                            <option value="mobility">Mobility / Stretch</option>
+                                            <option value="rest">Rest / Recovery</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               id="workout-time"
+                                               class="form-control bg-transparent border-0 border-bottom text-white"
+                                               placeholder="Time (e.g. 6 PM)">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="add-workout-btn" class="btn btn-primary w-100">
+                                            <i class="fa fa-plus me-1"></i>Add Workout
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <textarea id="workout-notes"
+                                              class="form-control bg-dark border-0 text-white"
+                                              rows="2"
+                                              placeholder="Optional notes (sets/reps, exercises, intensity, etc.)"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Workouts list -->
+                            <div id="workout-list">
+                                <!-- workouts.js will render workouts here -->
                             </div>
                         </div>
                     </div>
@@ -257,7 +292,9 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+            <i class="bi bi-arrow-up"></i>
+        </a>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -273,9 +310,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="js/gallery.js"></script>
-
-
+    <script src="js/workouts.js"></script>
 </body>
 
 </html>
