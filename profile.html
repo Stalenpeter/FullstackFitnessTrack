@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile - FitTrack</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white">
+
+    <div class="container py-5">
+
+        <h2 class="text-center mb-4">Edit Profile</h2>
+
+        <!-- PROFILE CARD -->
+        <div class="bg-secondary p-4 rounded shadow-lg mx-auto" style="max-width: 600px;">
+
+            <!-- PROFILE PICTURE -->
+            <div class="text-center mb-4">
+                <img id="profile-photo-preview" src="img/guest.jpg"
+                     class="rounded-circle mb-2"
+                     style="width: 100px; height: 100px; object-fit: cover;">
+                
+                <div>
+                    <input type="file" id="profile-photo-input"
+                           accept="image/*"
+                           class="form-control bg-dark border-0 mt-2">
+                </div>
+            </div>
+
+            <!-- FORM -->
+            <form id="profile-form">
+
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input id="profile-name" type="text" class="form-control bg-dark border-0 text-white">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Age</label>
+                        <input id="profile-age" type="number" class="form-control bg-dark border-0 text-white">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Height (cm)</label>
+                        <input id="profile-height" type="number" class="form-control bg-dark border-0 text-white">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Weight (kg)</label>
+                        <input id="profile-weight" type="number" class="form-control bg-dark border-0 text-white">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fitness Goal</label>
+                    <input id="profile-goal" type="text" class="form-control bg-dark border-0 text-white">
+                </div>
+
+                <div id="profile-error" class="text-danger mb-3"></div>
+
+                <button class="btn btn-primary w-100 mb-3">Save Changes</button>
+
+                <a href="index.html" class="btn btn-outline-light w-100">Back to Dashboard</a>
+
+                <hr class="my-4">
+
+                <button id="delete-account" class="btn btn-danger w-100" type="button">
+                    Delete Account
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+
+</body>
+</html>

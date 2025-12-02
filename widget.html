@@ -61,9 +61,10 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Guest User</h6>
-                        <span>Fitness Enthusiast</span>
+                        <h6 class="mb-0" id="sidebar-username">Guest User</h6>
+                        <span id="sidebar-role">Fitness Enthusiast</span>
                     </div>
+
                 </div>
             
                 <!-- Sidebar nav -->
@@ -361,36 +362,61 @@
             <!-- 4) Daily Diary - Full Width -->
             <div class="container-fluid pt-0 px-4 pb-4">
                 <div class="bg-secondary rounded p-4"
-                     style="
+                    style="
                         background-image: url('img/diary-bg.jpg');
                         background-size: cover;
                         background-position: center;
                         background-repeat: no-repeat;
                         background-blend-mode: overlay;
-                     ">
+                    ">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h5 class="mb-0">Daily Diary</h5>
-                        <a href="#" class="small text-decoration-underline">Open Diary Book</a>
+                        <div>
+                            <h5 class="mb-0">Daily Diary</h5>
+                            <small id="diary-date-label" class="text-muted"></small>
+                        </div>
+                        <a href="diary.html" class="small text-decoration-underline">Open Diary Book</a>
                     </div>
-
+                
                     <div class="mb-2">
                         <small class="text-muted">
-                            Write how you feel, what you achieved, or anything about your fitness
-                            journey today.
+                            Write how you feel, what you achieved, or anything about your fitness journey today.
                         </small>
                     </div>
-
+                
                     <div class="mb-3">
-                        <textarea class="form-control bg-dark border-0 text-white" rows="6"
-                                  placeholder="Today I feel..."></textarea>
+                        <textarea id="diary-text"
+                                class="form-control bg-dark border-0 text-white"
+                                rows="6"
+                                placeholder="Today I feel..."></textarea>
                     </div>
-
+                
                     <div class="d-flex justify-content-between align-items-center">
-                        <button class="btn btn-primary">Save Entry</button>
-                        <small class="text-muted">Entries will be saved by date (future feature)</small>
+                        <button id="diary-save-btn" class="btn btn-primary">Save Entry</button>
+                        <small id="diary-status" class="text-muted"></small>
                     </div>
                 </div>
+
             </div>
+            <!-- Calendar Day Modal -->
+            <div class="modal fade" id="calendarDayModal" tabindex="-1" aria-hidden="true">     
+                <div class="modal-dialog modal-dialog-centered modal-lg">       
+                    <div class="modal-content bg-secondary text-white">     
+                        <div class="modal-header">      
+                            <h5 class="modal-title" id="calendar-modal-title">Workouts</h5>     
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"     
+                                    aria-label="Close"></button>        
+                        </div>      
+                        <div class="modal-body" id="calendar-modal-body">       
+                            <!-- Filled by calendar.js -->      
+                        </div>      
+                        <div class="modal-footer">      
+                            <small class="text-muted me-auto">Check off workouts as you complete them.</small>      
+                            <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Close</button>       
+                        </div>      
+                    </div>      
+                </div>      
+            </div>      
+
 
 
 
@@ -420,10 +446,6 @@
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="js/calendar.js"></script>
-
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/chart/chart.min.js"></script>
@@ -433,10 +455,14 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/calendar.js"></script>
+
+
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="js/tasks.js"></script>
+    <script src="js/diary.js"></script>
 
 </body>
 

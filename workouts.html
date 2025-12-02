@@ -60,9 +60,10 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Guest User</h6>
-                        <span>Fitness Enthusiast</span>
+                        <h6 class="mb-0" id="sidebar-username">Guest User</h6>
+                        <span id="sidebar-role">Fitness Enthusiast</span>
                     </div>
+
                 </div>
             
                 <!-- Sidebar nav -->
@@ -154,28 +155,39 @@
 
             <!-- Page Header -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary rounded p-4 mb-4">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                <div class="bg-secondary rounded p-4 mb-4"
+                    style="
+                        background-image: url('img/workouts-header.jpg');
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-blend-mode: overlay;
+                    ">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h3 class="mb-2">Workouts &amp; Weekly Plan</h3>
+                            <h3 class="mb-1">Workouts &amp; Weekly Plan</h3>
                             <small class="text-muted">
-                                Create your weekly workout schedule, mark sessions complete, and keep track of your training.
+                                Pick a day and plan your exercises with categories, sets and reps.
                             </small>
-                        </div>
-                        <div class="mt-3 mt-md-0 text-md-end">
-                            <span class="badge bg-primary">Weekly View</span>
-                            <span class="badge bg-success">Saved Locally</span>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Main Workouts Layout -->
             <div class="container-fluid px-4 pb-4">
                 <div class="row g-4">
                     <!-- Left: Days of the week -->
                     <div class="col-lg-3">
-                        <div class="bg-secondary rounded p-3 h-100">
+                        <div class="bg-secondary rounded p-3 h-100"
+                            style="
+                                background-image: url('img/workouts-days-bg.jpeg');
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-blend-mode: overlay;
+                            ">
                             <h5 class="mb-3">Select Day</h5>
                             <div class="nav flex-column nav-pills gap-2" id="week-days">
                                 <!-- Buttons use data-day; JS controls active state -->
@@ -216,60 +228,101 @@
                                 <div>
                                     <h5 class="mb-1" id="selected-day-title">Workouts for Sunday</h5>
                                     <small class="text-muted" id="selected-day-subtitle">
-                                        Add your sessions for this day. You can mark them completed after you train.
+                                        Add your exercises with body-part categories, sets and reps. Check them off as you complete them.
                                     </small>
                                 </div>
                                 <div class="mt-3 mt-md-0">
                                     <span class="badge bg-info" id="workout-count-badge">0 Workouts</span>
                                 </div>
                             </div>
-
+                        
                             <!-- Add workout form -->
                             <div class="bg-dark rounded p-3 mb-3">
                                 <div class="row g-2">
+                                    <!-- Workout name -->
                                     <div class="col-md-4">
                                         <input type="text"
-                                               id="workout-name"
-                                               class="form-control bg-transparent border-0 border-bottom text-white"
-                                               placeholder="Workout name (e.g. Chest & Triceps)">
+                                            id="workout-name"
+                                            class="form-control bg-transparent border-0 border-bottom text-white"
+                                            placeholder="Workout name (e.g. Bench Press)">
                                     </div>
+                                
+                                    <!-- Category / body part -->
                                     <div class="col-md-3">
-                                        <select id="workout-type" class="form-select bg-dark border-0 border-bottom text-white">
-                                            <option value="strength">Strength</option>
-                                            <option value="cardio">Cardio</option>
-                                            <option value="mobility">Mobility / Stretch</option>
-                                            <option value="rest">Rest / Recovery</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
                                         <input type="text"
-                                               id="workout-time"
-                                               class="form-control bg-transparent border-0 border-bottom text-white"
-                                               placeholder="Time (e.g. 6 PM)">
+                                            id="workout-category"
+                                            list="bodypart-options"
+                                            class="form-control bg-transparent border-0 border-bottom text-white"
+                                            placeholder="Category (e.g. Chest)">
+                                        <datalist id="bodypart-options">
+                                            <option value="Chest"></option>
+                                            <option value="Back"></option>
+                                            <option value="Shoulders"></option>
+                                            <option value="Arms"></option>
+                                            <option value="Legs"></option>
+                                            <option value="Core"></option>
+                                            <option value="Full Body"></option>
+                                            <option value="Cardio"></option>
+                                            <option value="Mobility"></option>
+                                        </datalist>
                                     </div>
-                                    <div class="col-md-3">
-                                        <button type="button" id="add-workout-btn" class="btn btn-primary w-100">
-                                            <i class="fa fa-plus me-1"></i>Add Workout
+                                
+                                    <!-- Sets -->
+                                    <div class="col-md-2">
+                                        <input type="number"
+                                            id="workout-sets"
+                                            min="1"
+                                            class="form-control bg-transparent border-0 border-bottom text-white"
+                                            placeholder="Sets">
+                                    </div>
+                                
+                                    <!-- Reps -->
+                                    <div class="col-md-2">
+                                        <input type="number"
+                                            id="workout-reps"
+                                            min="1"
+                                            class="form-control bg-transparent border-0 border-bottom text-white"
+                                            placeholder="Reps">
+                                    </div>
+                                
+                                    <!-- Add button -->
+                                    <div class="col-md-1 d-grid">
+                                        <button type="button" id="add-workout-btn" class="btn btn-primary">
+                                            <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
+                            
+                                <!-- Optional notes -->
                                 <div class="mt-2">
                                     <textarea id="workout-notes"
-                                              class="form-control bg-dark border-0 text-white"
-                                              rows="2"
-                                              placeholder="Optional notes (sets/reps, exercises, intensity, etc.)"></textarea>
+                                            class="form-control bg-dark border-0 text-white"
+                                            rows="2"
+                                            placeholder="Optional notes (e.g. warm-up sets, intensity, tempo, rest time…)"></textarea>
                                 </div>
                             </div>
-
-                            <!-- Workouts list -->
-                            <div id="workout-list">
-                                <!-- workouts.js will render workouts here -->
+                        
+                            <!-- Workouts list table -->
+                            <div class="table-responsive">
+                                <table class="table table-dark table-striped align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 40px;">Done</th>
+                                            <th scope="col">Workout</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col" style="width: 80px;">Sets</th>
+                                            <th scope="col" style="width: 80px;">Reps</th>
+                                            <th scope="col">Notes</th>
+                                            <th scope="col" style="width: 60px;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="workout-list">
+                                        <!-- workouts.js will render rows here -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
@@ -283,6 +336,7 @@
                             Designed By <a href="">"US hehe"</a>
                             
                         </div>
+                        
                     </div>
                 </div>
             </div>

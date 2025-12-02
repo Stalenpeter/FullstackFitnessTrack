@@ -1,21 +1,25 @@
 (function () {
     const STORAGE_KEY = 'fittrackWorkouts';
 
-    // Elements
+    // Day selection elements
     const dayButtons = document.querySelectorAll('.day-btn');
     const dayTitle = document.getElementById('selected-day-title');
     const daySubtitle = document.getElementById('selected-day-subtitle');
     const workoutCountBadge = document.getElementById('workout-count-badge');
-    const workoutList = document.getElementById('workout-list');
 
+    // Form elements
     const workoutNameInput = document.getElementById('workout-name');
-    const workoutTypeSelect = document.getElementById('workout-type');
-    const workoutTimeInput = document.getElementById('workout-time');
+    const workoutCategoryInput = document.getElementById('workout-category');
+    const workoutSetsInput = document.getElementById('workout-sets');
+    const workoutRepsInput = document.getElementById('workout-reps');
     const workoutNotesInput = document.getElementById('workout-notes');
     const addWorkoutBtn = document.getElementById('add-workout-btn');
 
+    // Table body
+    const workoutListBody = document.getElementById('workout-list');
+
     // If this page isn't workouts.html, exit
-    if (!dayButtons.length || !dayTitle || !workoutList) return;
+    if (!dayButtons.length || !dayTitle || !workoutListBody) return;
 
     const DAY_LABELS = {
         sunday: 'Sunday',
@@ -33,34 +37,29 @@
     // ----------------------
     // Storage helpers
     // ----------------------
+    function defaultWeek() {
+        return {
+            sunday: [],
+            monday: [],
+            tuesday: [],
+            wednesday: [],
+            thursday: [],
+            friday: [],
+            saturday: []
+        };
+    }
+
     function loadWorkouts() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
                 workouts = JSON.parse(raw);
             } else {
-                // Initialize all days
-                workouts = {
-                    sunday: [],
-                    monday: [],
-                    tuesday: [],
-                    wednesday: [],
-                    thursday: [],
-                    friday: [],
-                    saturday: []
-                };
+                workouts = defaultWeek();
             }
         } catch (e) {
             console.error('Failed to load workouts from storage', e);
-            workouts = {
-                sunday: [],
-                monday: [],
-                tuesday: [],
-                wednesday: [],
-                thursday: [],
-                friday: [],
-                saturday: []
-            };
+            workouts = defaultWeek();
         }
     }
 
@@ -78,7 +77,7 @@
     function renderDayHeader() {
         const label = DAY_LABELS[selectedDay] || 'Day';
         dayTitle.textContent = `Workouts for ${label}`;
-        daySubtitle.textContent = `Plan your training schedule for ${label}. Add workouts below and mark them completed after you train.`;
+        daySubtitle.textContent = `Plan your exercises with categories, sets and reps for ${label}.`;
     }
 
     function renderWorkoutCount() {
@@ -87,106 +86,85 @@
         workoutCountBadge.textContent = count + (count === 1 ? ' Workout' : ' Workouts');
     }
 
-    function createWorkoutElement(item) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'border-bottom py-2';
-        wrapper.dataset.id = item.id;
+    function createRow(item) {
+        const tr = document.createElement('tr');
+        tr.dataset.id = item.id;
 
-        const topRow = document.createElement('div');
-        topRow.className = 'd-flex align-items-center justify-content-between';
-
-        const left = document.createElement('div');
-        left.className = 'd-flex align-items-center';
-
+        // Done checkbox
+        const tdDone = document.createElement('td');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.className = 'form-check-input m-0 me-2';
+        checkbox.className = 'form-check-input m-0';
         checkbox.checked = item.completed;
         checkbox.addEventListener('change', function () {
             toggleCompleted(item.id);
         });
+        tdDone.appendChild(checkbox);
 
-        const titleSpan = document.createElement('span');
+        // Workout name
+        const tdName = document.createElement('td');
         if (item.completed) {
             const del = document.createElement('del');
             del.textContent = item.name;
-            titleSpan.appendChild(del);
+            tdName.appendChild(del);
         } else {
-            titleSpan.textContent = item.name;
+            tdName.textContent = item.name;
         }
 
-        const tag = document.createElement('span');
-        tag.className = 'badge ms-2';
-        switch (item.type) {
-            case 'cardio':
-                tag.classList.add('bg-danger');
-                tag.textContent = 'Cardio';
-                break;
-            case 'mobility':
-                tag.classList.add('bg-info');
-                tag.textContent = 'Mobility';
-                break;
-            case 'rest':
-                tag.classList.add('bg-secondary', 'border', 'border-light');
-                tag.textContent = 'Rest';
-                break;
-            default:
-                tag.classList.add('bg-primary');
-                tag.textContent = 'Strength';
-        }
+        // Category
+        const tdCat = document.createElement('td');
+        tdCat.textContent = item.category || '-';
 
-        left.appendChild(checkbox);
-        left.appendChild(titleSpan);
-        left.appendChild(tag);
+        // Sets
+        const tdSets = document.createElement('td');
+        tdSets.textContent = item.sets ? String(item.sets) : '-';
 
-        const right = document.createElement('div');
-        right.className = 'd-flex align-items-center';
+        // Reps
+        const tdReps = document.createElement('td');
+        tdReps.textContent = item.reps ? String(item.reps) : '-';
 
-        if (item.time) {
-            const timeSmall = document.createElement('small');
-            timeSmall.className = 'text-muted me-3';
-            timeSmall.innerHTML = `<i class="fa fa-clock me-1"></i>${item.time}`;
-            right.appendChild(timeSmall);
-        }
+        // Notes
+        const tdNotes = document.createElement('td');
+        tdNotes.className = 'small text-muted';
+        tdNotes.textContent = item.notes || '';
 
-        // Delete button (we can add edit later)
+        // Actions (delete only for now)
+        const tdActions = document.createElement('td');
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'btn btn-sm text-muted';
         deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
         deleteBtn.addEventListener('click', function () {
             deleteWorkout(item.id);
         });
+        tdActions.appendChild(deleteBtn);
 
-        right.appendChild(deleteBtn);
+        tr.appendChild(tdDone);
+        tr.appendChild(tdName);
+        tr.appendChild(tdCat);
+        tr.appendChild(tdSets);
+        tr.appendChild(tdReps);
+        tr.appendChild(tdNotes);
+        tr.appendChild(tdActions);
 
-        topRow.appendChild(left);
-        topRow.appendChild(right);
-
-        wrapper.appendChild(topRow);
-
-        if (item.notes && item.notes.trim() !== '') {
-            const notes = document.createElement('div');
-            notes.className = 'mt-1 small text-muted';
-            notes.textContent = item.notes;
-            wrapper.appendChild(notes);
-        }
-
-        return wrapper;
+        return tr;
     }
 
     function renderWorkouts() {
-        workoutList.innerHTML = '';
+        workoutListBody.innerHTML = '';
 
         const list = workouts[selectedDay] || [];
 
         if (list.length === 0) {
-            const empty = document.createElement('div');
-            empty.className = 'text-muted small py-2';
-            empty.textContent = 'No workouts planned yet for this day. Add one above.';
-            workoutList.appendChild(empty);
+            const emptyRow = document.createElement('tr');
+            const td = document.createElement('td');
+            td.colSpan = 7;
+            td.className = 'text-muted small py-3';
+            td.textContent = 'No workouts added yet for this day. Use the form above to add exercises.';
+            emptyRow.appendChild(td);
+            workoutListBody.appendChild(emptyRow);
         } else {
             list.forEach(item => {
-                workoutList.appendChild(createWorkoutElement(item));
+                workoutListBody.appendChild(createRow(item));
             });
         }
 
@@ -198,8 +176,9 @@
     // ----------------------
     function addWorkout() {
         const name = (workoutNameInput.value || '').trim();
-        const type = workoutTypeSelect.value || 'strength';
-        const time = (workoutTimeInput.value || '').trim();
+        const category = (workoutCategoryInput.value || '').trim();
+        const sets = workoutSetsInput.value ? parseInt(workoutSetsInput.value, 10) : null;
+        const reps = workoutRepsInput.value ? parseInt(workoutRepsInput.value, 10) : null;
         const notes = (workoutNotesInput.value || '').trim();
 
         if (!name) {
@@ -213,8 +192,9 @@
         const newItem = {
             id,
             name,
-            type,
-            time,
+            category,
+            sets,
+            reps,
             notes,
             completed: false,
             createdAt: now.toISOString()
@@ -228,8 +208,11 @@
 
     function clearForm() {
         workoutNameInput.value = '';
-        workoutTimeInput.value = '';
+        workoutCategoryInput.value = '';
+        workoutSetsInput.value = '';
+        workoutRepsInput.value = '';
         workoutNotesInput.value = '';
+        workoutNameInput.focus();
     }
 
     function toggleCompleted(id) {
@@ -258,7 +241,6 @@
         if (!DAY_LABELS[dayKey]) return;
         selectedDay = dayKey;
 
-        // Update active state on buttons
         dayButtons.forEach(btn => {
             if (btn.dataset.day === dayKey) {
                 btn.classList.add('btn-primary');
