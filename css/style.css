@@ -320,3 +320,9 @@
 }
 
 
+/* Make top stat cards consistent height */
+.stat-card {
+    min-height: 150px;   /* tweak this value if you want taller cards */
+    display: flex;
+    align-items: center;
+}
